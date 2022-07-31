@@ -1,31 +1,15 @@
 import "./App.css";
-
-function App() {
-  const BUY_CAKE = "BUY_CAKE";
-
-  //action creator
-  function buyCake() {
-    return {
-      type: BUY_CAKE,
-    };
-  }
-
-  const initialState = {
-    numOfCake: 10,
-  };
-
-  const reducer = (state = initialState, action) => {
-    switch (action.type) {
-      case BUY_CAKE:
-        return { ...state, numOfCake: numOfCake - 1 };
-    }
-  };
-
+import { Provider } from "react-redux";
+import CakeContainer from "./components/cakeContainer";
+import store from "./redux/redux";
+const App = () => {
   return (
-    <>
-      <div className="App">Hello world</div>;<h1>hello world</h1>
-    </>
+    <Provider store={store}>
+      <div className="App">
+        <CakeContainer />
+      </div>
+    </Provider>
   );
-}
+};
 
 export default App;
