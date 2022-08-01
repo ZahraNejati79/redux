@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import {
   FETCH_USER_FAILURE,
   FETCH_USER_REQUEST,
@@ -26,15 +27,15 @@ const fetchUserSuccess = (user) => {
 // async user action creator
 export const userFetch = () => {
   return function (dispatch) {
-    dispatch(fetchUserRequest);
+    dispatch(fetchUserRequest());
     axios
       .get("https://jsonplaceholder.typicode.com/users")
       .then((res) => {
-        const userId = res.data.map((user) => user.id);
-        dispatch(fetchUserSuccess(userId));
+        const user = res.data;
+        dispatch(fetchUserSuccess(user));
       })
       .catch((err) => {
-        dispatch(fetchUserFailure(err));
+        dispatch(fetchUserFailure(err.message));
       });
   };
 };
